@@ -39,7 +39,8 @@
         fetch(
           window.location.hostname.includes("localhost")
             ? "http://localhost:8080/api/auth/google"
-            : "https://backend-rn.up.railway.app/api/auth/google",
+            : "https://backend-rn.up.railway.app/api/auth/google" ||
+                "https://nodejs-backend-rn.up.railway.app/api/auth/google",
           {
             method: "POST",
             headers: {
