@@ -1,11 +1,13 @@
+import { Producto, Usuario } from "../models/index.js";
 import { request, response } from "express";
-import path from "path";
-import fs from "fs";
+
 import { v2 as cloudinary } from "cloudinary";
-cloudinary.config(process.env.CLOUDINARY_URL);
-import { subirArchivo } from "../helpers/index.js";
-import { Usuario, Producto } from "../models/index.js";
 import { fileURLToPath } from "url";
+import fs from "fs";
+import path from "path";
+import { subirArchivo } from "../helpers/index.js";
+
+cloudinary.config(process.env.CLOUDINARY_URL);
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const cargarArchivo = async (req = request, res = response) => {

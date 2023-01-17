@@ -1,16 +1,14 @@
-import { Router } from "express";
-import { check } from "express-validator";
-import {
-  validarCampos,
-  validarJWT,
-  esAdminRole,
-  tieneRole,
-} from "../middlewares/index.js";
 import {
   emailExiste,
   esRolValido,
   existeUsuarioPorId,
 } from "../helpers/index.js";
+import {
+  esAdminRole,
+  tieneRole,
+  validarCampos,
+  validarJWT,
+} from "../middlewares/index.js";
 import {
   usuariosDelete,
   usuariosGet,
@@ -19,12 +17,16 @@ import {
   usuariosPut,
 } from "../controllers/index.js";
 
+import { Router } from "express";
+import { check } from "express-validator";
+
 const routerUser = Router();
 
 routerUser.get("/", usuariosGet);
 routerUser.put(
   "/:id",
   [
+    validarJWT,
     check("id").custom(existeUsuarioPorId),
     check("rol").custom(esRolValido),
     validarCampos,

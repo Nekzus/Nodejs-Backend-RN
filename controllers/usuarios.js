@@ -22,14 +22,15 @@ const usuariosGet = async (req = request, res = response) => {
 const usuariosPut = async (req = request, res = response) => {
   const { id } = req.params;
   const { _id, password, google, ...resto } = req.body;
-  // TODO: validar contra base de datos
+  //validar contra base de datos.
+
   if (password) {
     // Encriptar el password
     const salt = bcryptjs.genSaltSync();
     resto.password = bcryptjs.hashSync(password, salt);
   }
 
-  const usuario = await Usuario.findByIdAndUpdate(id, resto);
+  const usuario = await Usuario.findByIdAndUpdate(id, resto, { new: true });
 
   res.json(usuario);
 };
