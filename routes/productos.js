@@ -1,5 +1,3 @@
-import { Router } from "express";
-import { check } from "express-validator";
 import {
   actualizarProducto,
   borrarProducto,
@@ -7,13 +5,16 @@ import {
   obtenerProducto,
   obtenerProductos,
 } from "../controllers/index.js";
-import { existeCategoriaPorId, existeProductoPorId } from "../helpers/index.js";
 import {
   esAdminRole,
   tieneRole,
   validarCampos,
   validarJWT,
 } from "../middlewares/index.js";
+import { existeCategoriaPorId, existeProductoPorId } from "../helpers/index.js";
+
+import { Router } from "express";
+import { check } from "express-validator";
 
 const routerProd = Router();
 
@@ -32,7 +33,7 @@ routerProd.post(
   "/",
   [
     validarJWT,
-    tieneRole("ADMIN_ROLE", "VENTAS_ROLE"),
+    tieneRole("ADMIN_ROLE", "VENTAS_ROLE", "USER_ROLE"),
     check("nombre", "El nombre es obligatorio").not().isEmpty(),
     check("categoria").custom(existeCategoriaPorId),
     validarCampos,
@@ -45,7 +46,7 @@ routerProd.put(
   "/:id",
   [
     validarJWT,
-    tieneRole("ADMIN_ROLE", "VENTAS_ROLE"),
+    tieneRole("ADMIN_ROLE", "VENTAS_ROLE", "USER_ROLE"),
     check("id").custom(existeProductoPorId),
     validarCampos,
   ],
@@ -57,7 +58,7 @@ routerProd.delete(
   "/:id",
   [
     validarJWT,
-    esAdminRole,
+    // esAdminRole,
     check("id").custom(existeProductoPorId),
     validarCampos,
   ],

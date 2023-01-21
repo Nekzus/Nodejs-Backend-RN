@@ -1,11 +1,16 @@
 import mongoose from "mongoose";
 const { Schema, model } = mongoose;
 
+const CoordsSchema = Schema({
+  lat: { type: Number, default: 0 },
+  lng: { type: Number, default: 0 },
+});
+
 const ProductoSchema = Schema({
   nombre: {
     type: String,
     required: [true, "El nombre es obligatorio"],
-    unique: true,
+    // unique: true,
   },
   estado: { type: Boolean, default: true, required: true },
   usuario: { type: Schema.Types.ObjectId, ref: "Usuario", required: true },
@@ -13,7 +18,15 @@ const ProductoSchema = Schema({
   categoria: { type: Schema.Types.ObjectId, ref: "Categoria", required: true },
   descripcion: { type: String },
   disponible: { type: Boolean, default: true },
-  img: { type: String },
+  img: { type: String, default: null },
+  date: { type: Date, default: Date.now },
+  typeanimal: { type: String, default: null },
+  race: { type: String, default: null },
+  sex: { type: String, default: null },
+  location: { type: CoordsSchema, default: { lat: 0, lng: 0 } },
+  identification: { type: Boolean, default: false },
+  description: { type: String },
+  phone: { type: Number },
 });
 
 ProductoSchema.methods.toJSON = function () {

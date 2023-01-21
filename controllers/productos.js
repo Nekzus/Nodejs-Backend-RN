@@ -1,4 +1,5 @@
 import { request, response } from "express";
+
 import { Producto } from "../models/index.js";
 
 // obtenerProductos - paginado - total - populate
@@ -33,11 +34,11 @@ const crearProducto = async (req = request, res = response) => {
   const { estado, usuario, ...body } = req.body;
   const nombre = body.nombre.toUpperCase();
   const productoDB = await Producto.findOne({ nombre });
-  if (productoDB) {
-    return res.status(400).json({
-      msg: `El producto ${productoDB.nombre}, ya existe`,
-    });
-  }
+  // if (productoDB) {
+  //   return res.status(400).json({
+  //     msg: `El producto ${productoDB.nombre}, ya existe`,
+  //   });
+  // }
 
   try {
     // Crear data a guardar
