@@ -7,13 +7,13 @@ const CoordsSchema = Schema({
 });
 
 const ProductoSchema = Schema({
-  nombre: {
+  title: {
     type: String,
-    required: [true, "El nombre es obligatorio"],
+    required: [true, "El titulo es obligatorio"],
     // unique: true,
   },
   estado: { type: Boolean, default: true, required: true },
-  usuario: { type: Schema.Types.ObjectId, ref: "Usuario", required: true },
+  user: { type: Schema.Types.ObjectId, ref: "Usuario", required: true },
   precio: { type: Number, default: 0 },
   categoria: { type: Schema.Types.ObjectId, ref: "Categoria", required: true },
   descripcion: { type: String },
@@ -32,9 +32,9 @@ const ProductoSchema = Schema({
 ProductoSchema.methods.toJSON = function () {
   const { __v, estado, ...producto } = this.toObject();
 
-  if (producto.usuario._id) {
-    producto.usuario.uid = producto.usuario._id;
-    delete producto.usuario._id;
+  if (producto.user._id) {
+    producto.user.uid = producto.user._id;
+    delete producto.user._id;
   }
 
   return producto;

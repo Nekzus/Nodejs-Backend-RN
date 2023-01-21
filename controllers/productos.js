@@ -32,11 +32,11 @@ const obtenerProducto = async (req = request, res = response) => {
 // crearProducto
 const crearProducto = async (req = request, res = response) => {
   const { estado, usuario, ...body } = req.body;
-  const nombre = body.nombre.toUpperCase();
-  const productoDB = await Producto.findOne({ nombre });
+  // const title = body.title.toUpperCase();
+  // const productoDB = await Producto.findOne({ title });
   // if (productoDB) {
   //   return res.status(400).json({
-  //     msg: `El producto ${productoDB.nombre}, ya existe`,
+  //     msg: `El producto ${productoDB.title}, ya existe`,
   //   });
   // }
 
@@ -44,8 +44,8 @@ const crearProducto = async (req = request, res = response) => {
     // Crear data a guardar
     const data = {
       ...body,
-      nombre: body.nombre.toUpperCase(),
-      usuario: req.usuario._id,
+      title: body.title.toUpperCase(),
+      user: req.usuario._id,
     };
     // Guardar en la base de datos
     const producto = new Producto(data);
@@ -63,8 +63,8 @@ const crearProducto = async (req = request, res = response) => {
 const actualizarProducto = async (req = request, res = response) => {
   const { id } = req.params;
   const { estado, usuario, ...data } = req.body;
-  if (data.nombre) {
-    data.nombre = data.nombre.toUpperCase();
+  if (data.title) {
+    data.title = data.title.toUpperCase();
   }
   data.usuario = req.usuario._id;
   const producto = await Producto.findByIdAndUpdate(id, data, {

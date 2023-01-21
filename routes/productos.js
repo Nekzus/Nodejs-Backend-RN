@@ -34,7 +34,7 @@ routerProd.post(
   [
     validarJWT,
     tieneRole("ADMIN_ROLE", "VENTAS_ROLE", "USER_ROLE"),
-    check("nombre", "El nombre es obligatorio").not().isEmpty(),
+    check("title", "El titulo es obligatorio").not().isEmpty(),
     check("categoria").custom(existeCategoriaPorId),
     validarCampos,
   ],
