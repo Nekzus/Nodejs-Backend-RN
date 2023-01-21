@@ -9,7 +9,7 @@ const obtenerProductos = async (req = request, res = response) => {
   const [total, productos] = await Promise.all([
     Producto.countDocuments(query),
     Producto.find(query)
-      .populate("usuario", "nombre")
+      .populate("user", "nombre")
       .populate("categoria", "nombre")
       .skip(Number(desde))
       .limit(Number(limite)),
@@ -24,7 +24,7 @@ const obtenerProductos = async (req = request, res = response) => {
 const obtenerProducto = async (req = request, res = response) => {
   const { id } = req.params;
   const producto = await Producto.findById(id)
-    .populate("usuario", "nombre")
+    .populate("user", "nombre")
     .populate("categoria", "nombre");
   res.json(producto);
 };
