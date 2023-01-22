@@ -14,10 +14,7 @@ const ProductoSchema = Schema({
   },
   estado: { type: Boolean, default: true, required: true },
   user: { type: Schema.Types.ObjectId, ref: "Usuario", required: true },
-  precio: { type: Number, default: 0 },
   categoria: { type: Schema.Types.ObjectId, ref: "Categoria", required: true },
-  descripcion: { type: String },
-  disponible: { type: Boolean, default: true },
   img: { type: String, default: null },
   date: { type: Date, default: Date.now },
   typeanimal: { type: String, default: null },
@@ -25,8 +22,8 @@ const ProductoSchema = Schema({
   sex: { type: String, default: null },
   location: { type: CoordsSchema, default: { lat: 0, lng: 0 } },
   identification: { type: Boolean, default: false },
-  description: { type: String },
-  phone: { type: Number },
+  description: { type: String, default: null },
+  phone: { type: Number, default: null },
 });
 
 ProductoSchema.methods.toJSON = function () {
