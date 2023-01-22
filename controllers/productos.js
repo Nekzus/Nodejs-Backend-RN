@@ -4,7 +4,7 @@ import { Producto } from "../models/index.js";
 
 // obtenerProductos - paginado - total - populate
 const obtenerProductos = async (req = request, res = response) => {
-  const { limite = 5, desde = 0 } = req.query;
+  const { limite = 1500, desde = 0 } = req.query;
   const query = { estado: true };
   const [total, productos] = await Promise.all([
     Producto.countDocuments(query),
