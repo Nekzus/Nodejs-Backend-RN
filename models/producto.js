@@ -23,7 +23,12 @@ const ProductoSchema = Schema({
   location: { type: CoordsSchema, default: { lat: 0, lng: 0 } },
   identification: { type: Boolean, default: false },
   description: { type: String, default: null },
-  phone: { type: Number, default: null },
+  phone: {
+    type: String,
+    // required: true,
+    // match: /^[0-9\s]{3}-?[0-9\s]{7}$/,
+    default: null,
+  },
 });
 
 ProductoSchema.methods.toJSON = function () {
