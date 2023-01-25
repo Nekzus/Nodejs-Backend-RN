@@ -23,6 +23,7 @@ const ProductoSchema = Schema({
   location: { type: CoordsSchema, default: { lat: 0, lng: 0 } },
   identification: { type: Boolean, default: false },
   description: { type: String, default: null },
+  addss: { type: String, default: null },
   phone: {
     type: String,
     // required: true,
